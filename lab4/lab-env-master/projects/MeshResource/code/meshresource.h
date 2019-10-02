@@ -28,16 +28,16 @@ public:
 	MeshResource(Vertex verts[], std::vector<GLuint> indices);
 	/** stores each vertices value for use in the mesh methods */
 	/** stores each indices value for use in the mesh methods */
-
+	~MeshResource();
 	Vertex *verts;
 	std::vector<GLuint> indices;
 
 	/** method to bind the Vertex array object*/
-	void BindVao();
+	void BindVao() const;
 	/** method to bind the Vertex buffer object*/
-	void BindVbo();
+	void BindVbo() const;
 	/** method to bind the Index buffer object */
-	void BindIbo();
+	void BindIbo() const;
 
 
 	void UnBindIbo();
@@ -58,6 +58,6 @@ public:
 
 private:
 	/** Unsigned ints used in openGL to represent each object */
-	GLuint vao,vbo,ibo;
+	GLuint vao{},vbo{},ibo{};
 	
 };

@@ -20,14 +20,14 @@ public:
 	float GetZ() { return _vect_values[2]; }
 	float GetW() { return _vect_values[3]; }
 	/**
-	* costum construct for a 4D-vector
+	* custom construct for a 4D-vector
 	* @param x : x-value
 	* @param y : y-value
 	* @param z : z-value
 	* @param w : w-value
 	* @return : 4D-vector
 	*/
-	Vector4D(float x, float y, float z, float w) //custom construct
+	Vector4D(const float x, const float y, const float z, const float w) //custom construct
 	{
 		this->_vect_values[0] = x;
 		this->_vect_values[1] = y;
@@ -65,7 +65,7 @@ public:
 	*/
 	float DotProduct(const Vector4D& vect2)
 	{
-		float result =
+		const float result =
 			this->_vect_values[0] * vect2._vect_values[0] +
 			this->_vect_values[1] * vect2._vect_values[1] +
 			this->_vect_values[2] * vect2._vect_values[2];
@@ -74,6 +74,7 @@ public:
 	}
 	/**
 	* Performs crossproduct with another vector
+	* @param vect2
 	* @param vect4 : the 2nd vector used in the crossproduct
 	* @return Returns a new vector 
 	*/
@@ -94,7 +95,7 @@ public:
 	*/
 	float LenghtOf()
 	{
-		float lenght = sqrt(pow(this->_vect_values[0], 2) + pow(this->_vect_values[1], 2) + pow(this->_vect_values[2], 2)); // square root of (x^2 + y^2)
+		const float lenght = sqrt(pow(this->_vect_values[0], 2) + pow(this->_vect_values[1], 2) + pow(this->_vect_values[2], 2)); // square root of (x^2 + y^2)
 		return lenght;
 	}
 	/**
@@ -211,7 +212,7 @@ public:
 	}
 
 private:
-	float _vect_values[4];
+	float _vect_values[4]{};
 };
 
 
@@ -281,7 +282,7 @@ public:
 	* @param angle : the angle in radians
 	* @return rotation matrix around the x axis
 	*/
-	Matrix4D RotX_axis(float rad)
+	static Matrix4D RotX_axis(float rad)
 	{
 		return Matrix4D(
 			1, 0, 0, 0,
@@ -293,7 +294,7 @@ public:
 	* @param angle : the angle in radians
 	* @return rotation matrix around the x axis
 	*/
-	Matrix4D RotY_axis(float rad)
+	static Matrix4D RotY_axis(float rad)
 	{
 		return Matrix4D(
 			cos(rad), 0, -sin(rad), 0,
@@ -305,7 +306,7 @@ public:
 	* @param angle : the angle in radians
 	* @return rotation matrix around the Z-axis
 	*/
-	Matrix4D RotZ_axis(float rad)
+	static Matrix4D RotZ_axis(float rad)
 	{
 		return Matrix4D(
 			cos(rad), -sin(rad), 0, 0,
@@ -318,14 +319,14 @@ public:
 	* @param vect : vector which axis is rotated around
 	* @return rotation matrix around the given vector
 	*/
-	Matrix4D RotVect_axis(Vector4D vect, float rad)
+	static Matrix4D RotVect_axis(Vector4D vect, float rad)
 	{
-		float co = cos(rad);
-		float tcos = 1 - cos(rad);
-		float si = sin(rad);
-		float x = vect[0];
-		float y = vect[1];
-		float z = vect[2];
+		const float co = cos(rad);
+		const float tcos = 1 - cos(rad);
+		const float si = sin(rad);
+		const float x = vect[0];
+		const float y = vect[1];
+		const float z = vect[2];
 
 
 		return Matrix4D(
@@ -370,7 +371,7 @@ public:
 	static Matrix4D Inverse(Matrix4D mat)
 	{
 		// if the determinant is 0, there's no possible inverse
-		float det = mat.Det();
+		const float det = mat.Det();
 		if (det == 0)
 			mat;
 
@@ -428,31 +429,29 @@ public:
 						mat.A[4], mat.A[5], mat.A[6],
 						mat.A[8], mat.A[9], mat.A[10] };
 
-		//define the new cells for the adjugate  4x4-matrix
-		float x1, x2, x3, x4, y1, y2, y3, y4, z1, z2, z3, z4, w1, w2, w3, w4;
 		// define the fraction used in calculating the inverse
-		float detdiv = (1 / det);
+		const float detdiv = (1 / det);
 
 		//calculating each cell. each cell's value is the determinant of it's 3x3-submatrix
-		x1 = Matrix4D::det3x3(submat1);
-		x2 = Matrix4D::det3x3(submat2);
-		x3 = Matrix4D::det3x3(submat3);
-		x4 = Matrix4D::det3x3(submat4);
+		const float x1 = Matrix4D::det3x3(submat1);
+		const float x2 = Matrix4D::det3x3(submat2);
+		const float x3 = Matrix4D::det3x3(submat3);
+		const float x4 = Matrix4D::det3x3(submat4);
 
-		y1 = Matrix4D::det3x3(submat5);
-		y2 = Matrix4D::det3x3(submat6);
-		y3 = Matrix4D::det3x3(submat7);
-		y4 = Matrix4D::det3x3(submat8);
+		const float y1 = Matrix4D::det3x3(submat5);
+		const float y2 = Matrix4D::det3x3(submat6);
+		const float y3 = Matrix4D::det3x3(submat7);
+		const float y4 = Matrix4D::det3x3(submat8);
 
-		z1 = Matrix4D::det3x3(submat9);
-		z2 = Matrix4D::det3x3(submat10);
-		z3 = Matrix4D::det3x3(submat11);
-		z4 = Matrix4D::det3x3(submat12);
+		const float z1 = Matrix4D::det3x3(submat9);
+		const float z2 = Matrix4D::det3x3(submat10);
+		const float z3 = Matrix4D::det3x3(submat11);
+		const float z4 = Matrix4D::det3x3(submat12);
 
-		w1 = Matrix4D::det3x3(submat13);
-		w2 = Matrix4D::det3x3(submat14);
-		w3 = Matrix4D::det3x3(submat15);
-		w4 = Matrix4D::det3x3(submat16);
+		const float w1 = Matrix4D::det3x3(submat13);
+		const float w2 = Matrix4D::det3x3(submat14);
+		const float w3 = Matrix4D::det3x3(submat15);
+		const float w4 = Matrix4D::det3x3(submat16);
 
 		//construct the 4x4 matrix
 		Matrix4D adj(x1, -y1, z1, -w1, -x2, y2, -z2, w2, x3, -y3, z3, -w3, -x4, y4, -z4, w4);
@@ -491,8 +490,7 @@ public:
 	*/
 	Matrix4D Inverse()
 	{
-
-		float det = this->Det();
+		const float det = this->Det();
 		if (det == 0)
 			this;
 
@@ -548,28 +546,27 @@ public:
 						this->A[4], this->A[5], this->A[6],
 						this->A[8], this->A[9], this->A[10] };
 
-		float x1, x2, x3, x4, y1, y2, y3, y4, z1, z2, z3, z4, w1, w2, w3, w4;
-		float detdiv = (1 / det);
+		const float detdiv = (1 / det);
 
-		x1 = Matrix4D::det3x3(submat1);
-		x2 = Matrix4D::det3x3(submat2);
-		x3 = Matrix4D::det3x3(submat3);
-		x4 = Matrix4D::det3x3(submat4);
+		const float x1 = Matrix4D::det3x3(submat1);
+		const float x2 = Matrix4D::det3x3(submat2);
+		const float x3 = Matrix4D::det3x3(submat3);
+		const float x4 = Matrix4D::det3x3(submat4);
 
-		y1 = Matrix4D::det3x3(submat5);
-		y2 = Matrix4D::det3x3(submat6);
-		y3 = Matrix4D::det3x3(submat7);
-		y4 = Matrix4D::det3x3(submat8);
+		const float y1 = Matrix4D::det3x3(submat5);
+		const float y2 = Matrix4D::det3x3(submat6);
+		const float y3 = Matrix4D::det3x3(submat7);
+		const float y4 = Matrix4D::det3x3(submat8);
 
-		z1 = Matrix4D::det3x3(submat9);
-		z2 = Matrix4D::det3x3(submat10);
-		z3 = Matrix4D::det3x3(submat11);
-		z4 = Matrix4D::det3x3(submat12);
+		const float z1 = Matrix4D::det3x3(submat9);
+		const float z2 = Matrix4D::det3x3(submat10);
+		const float z3 = Matrix4D::det3x3(submat11);
+		const float z4 = Matrix4D::det3x3(submat12);
 
-		w1 = Matrix4D::det3x3(submat13);
-		w2 = Matrix4D::det3x3(submat14);
-		w3 = Matrix4D::det3x3(submat15);
-		w4 = Matrix4D::det3x3(submat16);
+		const float w1 = Matrix4D::det3x3(submat13);
+		const float w2 = Matrix4D::det3x3(submat14);
+		const float w3 = Matrix4D::det3x3(submat15);
+		const float w4 = Matrix4D::det3x3(submat16);
 
 		Matrix4D adj(x1, -y1, z1, -w1, -x2, y2, -z2, w2, x3, -y3, z3, -w3, -x4, y4, -z4, w4);
 		adj.Transpose();
@@ -584,21 +581,16 @@ public:
 		this->A[1] = this->A[4];
 		this->A[2] = this->A[8];
 		this->A[3] = this->A[12];
-
 		this->A[4] = this->A[1];
-		this->A[5] = this->A[5];
-		this->A[6] = this->A[6];
-		this->A[7] = this->A[7];
-
+		this->A[6] = this->A[9];
+		this->A[7] = this->A[13];
 		this->A[8] = this->A[2];
 		this->A[9] = this->A[6];
-		this->A[10] = this->A[10];
 		this->A[11] = this->A[14];
-
 		this->A[12] = this->A[3];
 		this->A[13] = this->A[7];
 		this->A[14] = this->A[11];
-		this->A[15] = this->A[15];
+
 	}
 
 	/** 4x4 matrix multiplication with a 4x4 matrix
@@ -689,13 +681,12 @@ public:
 
 	static Matrix4D PerspProj(float fov, float aspect, float near, float far)
 	{
-		
-		float r = tan(fov/2)*near;
-		float t = r/aspect;
-		float l = r*-1;
-		float b = t*-1;
-		float n2 = near*2;
-		Matrix4D proj(
+		const float r = tan(fov/2)*near;
+		const float t = r/aspect;
+		const float l = r*-1;
+		const float b = t*-1;
+		const float n2 = near*2;
+		const Matrix4D proj(
 			n2/(r-l),	0,			(r + l) / (r - l),	0,
 			0,			n2/(t-b),	 (t + b) / (t - b),	0,
 			0,			0,			-((far+near)/(far-near)), -((2 * far * near) / (far - near)),
@@ -709,14 +700,14 @@ private:
 	* @param submat[9] : a submatrix of a 4x4 matrix
 	* @return determinant of a 3x3 matrix
 	*/
-	static float det3x3(float submat[9])
+	static float det3x3(const float submat[9])
 	{
 
 		return submat[0] * (submat[4] * submat[8] - submat[5] * submat[7]) -
 			submat[1] * (submat[3] * submat[8] - submat[5] * submat[6]) +
 			submat[2] * (submat[3] * submat[7] - submat[4] * submat[6]);
 	}
-	float _matrix_values[16]; /*[ x1[0]  y1[1]  z1[2]  w1[3]  ]
+	float _matrix_values[16]{}; /*[ x1[0]  y1[1]  z1[2]  w1[3]  ]
 								[ x2[4]  y2[5]  z2[6]  w2[7]  ]
 								[ x3[8]  y3[9]  z3[10] w3[11] ]
 								[ x4[12] y4[13] z4[14  w4[15] ] */

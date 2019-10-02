@@ -15,11 +15,11 @@ public:
 
 	~Texture();
 
-	void Bind(unsigned int textslot);
+	void Bind(unsigned int textslot) const;
 	void Unbind();
 
-	int GetWidht(){ return widht;}
-	int GetHeight(){ return height;}
-	int Getbpp(){ return bpp;}
+	int GetWidht() const { return widht;}
+	int GetHeight() const { return height;}
+	int Getbpp() const { return bpp;}
 
 };

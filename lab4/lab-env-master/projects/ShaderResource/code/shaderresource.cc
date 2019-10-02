@@ -10,7 +10,7 @@
 ShaderResource::ShaderResource(const std::string& file)
 : path(file), shader_id(0)
 {
-	ShaderProgram src = Parser(file);
+	const ShaderProgram src = Parser(file);
 	shader_id = CreateShader(src.vs,src.fs);
 }
 ShaderResource::~ShaderResource()
@@ -18,7 +18,7 @@ ShaderResource::~ShaderResource()
 	glDeleteProgram(shader_id);
 }
 
-ShaderProgram ShaderResource::Parser(const std::string &path)
+ShaderProgram ShaderResource::Parser(const std::string &path) const
 {
 	std::ifstream stream(path);
 
@@ -42,7 +42,7 @@ ShaderProgram ShaderResource::Parser(const std::string &path)
 		}
 		else
 		{
-			stringStream[(int)type] << line << '\n'; // if anything else, add it to appropriate string stream
+			stringStream[static_cast<int>(type)] << line << '\n'; // if anything else, add it to appropriate string stream
 		}
 	}
 
@@ -50,9 +50,9 @@ ShaderProgram ShaderResource::Parser(const std::string &path)
 }
 
 
-unsigned int ShaderResource::CompShader(unsigned int type, const std::string &source)
+unsigned int ShaderResource::CompShader(const unsigned int type, const std::string &source)
 {
-	unsigned int id = glCreateShader(type);
+	const unsigned int id = glCreateShader(type);
 	const char * src = source.c_str();
 	glShaderSource(id, 1, &src, nullptr);
 	glCompileShader(id);
@@ -63,7 +63,7 @@ unsigned int ShaderResource::CompShader(unsigned int type, const std::string &so
 	if (result == GL_FALSE) {
 		int lenght;
 		glGetShaderiv(id, GL_INFO_LOG_LENGTH, &lenght);
-		char* message = (char*)alloca(lenght*sizeof(char));
+		char* message = static_cast<char*>(alloca(sizeof(char) * lenght));
 		glGetShaderInfoLog(id, lenght, &lenght, message);
 		std::cout << "failed to compile " << (type == GL_VERTEX_SHADER ? "vertex" : "fragment") << " SHADER" << std::endl;
 		std::cout << message << std::endl;
@@ -75,9 +75,9 @@ unsigned int ShaderResource::CompShader(unsigned int type, const std::string &so
 
 unsigned int ShaderResource::CreateShader(const std::string & vert_shader, const std::string & frag_shader)
 {
-	unsigned int program = glCreateProgram();
-	unsigned int vs = CompShader(GL_VERTEX_SHADER, vert_shader);
-	unsigned int fs = CompShader(GL_FRAGMENT_SHADER, frag_shader);
+	const unsigned int program = glCreateProgram();
+	const unsigned int vs = CompShader(GL_VERTEX_SHADER, vert_shader);
+	const unsigned int fs = CompShader(GL_FRAGMENT_SHADER, frag_shader);
 
 	glAttachShader(program, vs);
 	glAttachShader(program, fs);
@@ -91,7 +91,7 @@ unsigned int ShaderResource::CreateShader(const std::string & vert_shader, const
 }
 
 
-void ShaderResource::Bind()
+void ShaderResource::Bind() const
 {
 	glUseProgram(shader_id);
 }
@@ -115,10 +115,10 @@ int ShaderResource::GetUniLocation(const std::string &name)
 	if (uniformCache.find(name)!= uniformCache.end()) //checks if uniform already exists in cache
 		return uniformCache[name];
 
-	int location = glGetUniformLocation(shader_id,name.c_str());
+	const int location = glGetUniformLocation(shader_id,name.c_str());
 
 	if(location ==-1) //file not found
-		std::cout<<name<< " doesnt exist" << std::endl;
+		std::cout<<name<< " doesn't exist" << std::endl;
 
 	uniformCache[name] = location; //adds uniform to cache
 	return location;

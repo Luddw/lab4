@@ -1,12 +1,22 @@
 #include "meshresource.h"
+#include <utility>
 
 
 MeshResource::MeshResource(Vertex verts[], std::vector<GLuint> indices)
 {
     this->verts = verts;
-    this->indices = indices;
+    this->indices = std::move(indices);
 }
-MeshResource::MeshResource()
+
+MeshResource::~MeshResource()
+{
+	glDeleteBuffers(1,&ibo);
+	glDeleteBuffers(1, &vbo);
+	
+
+}
+
+MeshResource::MeshResource(): verts(nullptr)
 {
 	this->verts = verts;
 	this->indices = indices;
@@ -16,7 +26,7 @@ void MeshResource::SetupIndexBuffer(unsigned int size)
 {
     glGenBuffers(1, &ibo);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-    GLuint buffer_size = size *sizeof(GLuint);
+    const GLuint buffer_size = size *sizeof(GLuint);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER,buffer_size, &indices[0], GL_STATIC_DRAW);
 }
 
@@ -40,16 +50,16 @@ void MeshResource::SetupVertexArray()
 	glBindVertexArray(0);
 }
 
-void MeshResource::BindVao()
+void MeshResource::BindVao() const
 {
     glBindVertexArray(vao);
 }
 
-void MeshResource::BindIbo()
+void MeshResource::BindIbo() const
 {
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
 }
-void MeshResource::BindVbo()
+void MeshResource::BindVbo() const
 {
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
 }

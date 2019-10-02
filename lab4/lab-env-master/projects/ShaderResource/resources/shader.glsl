@@ -1,4 +1,3 @@
-
 #shader vertex 
 #version 430
 layout(location=0) in vec3 pos;
@@ -19,5 +18,6 @@ uniform sampler2D text;
 out vec4 Color;
 void main()
 {
-	Color = texture2D(text,UV);
+	float mipmaplvl = 1.0f;
+	Color = texture2D(text,UV,mipmaplvl);
 };
