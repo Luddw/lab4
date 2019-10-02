@@ -134,9 +134,9 @@ Lab3::Run()
 		cam =rot* cam;
 		view = Lookat(cam, Vector4D(0, 0, 0), Vector4D(0, 1, 0));
 		mv = view *  model;
-		
-		glUniformMatrix4fv(0, 1, GL_TRUE, &(mv)[0]); 
-		glUniformMatrix4fv(1, 1, GL_TRUE, &(proj)[0]);
+		shad.SetUniformMatrix4fv("mv", mv);
+		shad.SetUniformMatrix4fv("proj", proj);
+
 		
 
 		mesh.DrawCube(0.5f);

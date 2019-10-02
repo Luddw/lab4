@@ -7,7 +7,7 @@ Texture::Texture(const std::string &path) :  tex_handle(0),filepath(path), local
 
 	localbuf = stbi_load(path.c_str(),&widht,&height,&bpp, 4);
 	if (localbuf == nullptr)
-		std::cout << "PERKELE";
+		std::cout << "Texture file failed to load" << std::endl;
 
 	
 	glGenTextures(1,&tex_handle);
