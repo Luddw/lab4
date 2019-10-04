@@ -9,10 +9,11 @@ class Cam
 private:
     Vector4D pos;
     Vector4D look_dir;
-
+    
 public:
     Cam(/* args */);
     ~Cam();
-    void LookAt(Vector4D cam, Vector4D target, Vector4D up);
+    void LookAt(Vector4D target, Vector4D up);
+    void Rot(float rad);
 };
 

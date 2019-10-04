@@ -44,3 +44,7 @@ void Transform::Scale(float x, float y, float z)
 	this->translation[5] = y;
 	this->translation[10] = z;
 }
+Matrix4D Transform::MakeModel()
+{
+	return (translation * rot * scale);
+}
