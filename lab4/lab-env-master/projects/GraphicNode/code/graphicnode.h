@@ -3,6 +3,7 @@
 #include "shaderresource.h"
 #include "texture.h"
 #include "transform.h"
+#include "cam.h"
 #include <memory>
 
 class GraphicNode
@@ -12,11 +13,13 @@ private:
 	std::shared_ptr<Texture> p_Texture;
 	std::shared_ptr<ShaderResource> p_Shader;
 	std::shared_ptr<Transform> p_Transform;
-	
+	std::shared_ptr<Cam> p_Cam;
 public:
 	GraphicNode(MeshResource& mesh, Texture& tex, ShaderResource& shader, Transform& trans);
 	~GraphicNode();
 
+
+	GraphicNode(std::shared_ptr<MeshResource> mesh, Texture& tex, ShaderResource& shader, Transform& trans);
 	void Draw();
 	
 	void SetMesh(MeshResource& newmesh);

@@ -30,7 +30,7 @@ Texture::Texture(const std::string &path) :  tex_handle(0),filepath(path), local
 Texture::Texture() :  tex_handle(0), localbuf(nullptr),widht(0),height(0),bpp(0)
 {
 	stbi_set_flip_vertically_on_load(true);
-	localbuf = stbi_load("./resources/texture.png",&widht,&height,&bpp,4);
+	localbuf = stbi_load(".. /texture1.png",&widht,&height,&bpp,4);
 	glGenTextures(1,&tex_handle);
 	glBindTexture(GL_TEXTURE_2D,tex_handle);
 	

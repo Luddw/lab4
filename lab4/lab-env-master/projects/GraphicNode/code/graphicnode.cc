@@ -1,13 +1,23 @@
 #include "graphicnode.h"
 
-GraphicNode::GraphicNode(MeshResource& mesh, Texture& tex, ShaderResource& shader, Transform& trans)
+GraphicNode::GraphicNode(std::shared_ptr<MeshResource> mesh, Texture& tex, ShaderResource& shader, Transform& trans)
 {
 	
 }
 
 void GraphicNode::Draw()
 {
+	p_Mesh->DrawCube(1);
+	p_Texture->Bind(0);
+	p_Shader->Bind();
+	p_Shader->SetUniformMatrix4fv("m", p_Transform->MakeModel());
+	p_Shader->SetUniformMatrix4fv("vp", p_Cam->GetProj() * p_Cam->GetView());
+
+	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, nullptr);
+
 }
+
+
 
 void GraphicNode::SetMesh(MeshResource& newmesh)
 {

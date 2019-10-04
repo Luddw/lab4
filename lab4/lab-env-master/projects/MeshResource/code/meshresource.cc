@@ -164,8 +164,8 @@ void MeshResource::DrawCube(float size)
 		//Vertex(Vector4D(size, -size, -size), Vector4D(0.5f, 0.25f)),
 		
 	};
-	
-	std::vector<GLuint> indices = {
+
+	const std::vector<GLuint> indices = {
 	0,1,3,		//triangle 1 //front
 	2,3,1,		//triagnle 2
 

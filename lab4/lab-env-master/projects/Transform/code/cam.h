@@ -8,12 +8,16 @@ class Cam
 {
 private:
     Vector4D pos;
-    Vector4D look_dir;
-    
+	Matrix4D perspective;
+	Matrix4D view;
 public:
     Cam(/* args */);
     ~Cam();
     void LookAt(Vector4D target, Vector4D up);
+	void SetPerspective(float fov, float aspectratio, float near, float far);
     void Rot(float rad);
+
+	Matrix4D GetView();
+	Matrix4D GetProj();
 };
 
