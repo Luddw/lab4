@@ -23,7 +23,7 @@ void Transform::RotY(float rad)
 
 void Transform::RotZ(float rad)
 {
-	rot = rot * Matrix4D::RotY_axis(rad);
+	rot = rot * Matrix4D::RotZ_axis(rad);
 }
 
 void Transform::RotVect(Vector4D vect, float rad)

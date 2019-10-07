@@ -187,11 +187,12 @@ void MeshResource::DrawCube(float size)
 
 
 	};
-	MeshResource m(vertz, indices);
 
-	m.SetupVertexBuffer(24);
-	m.SetupIndexBuffer(36);
-	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, nullptr);
-	m.UnBindIbo();
-	m.UnBindVbo();
+	verts = vertz;
+	this->indices = indices;
+	SetupVertexBuffer(24);
+	SetupIndexBuffer(36);
+	//glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, nullptr);
+	/*m.UnBindIbo();
+	m.UnBindVbo();*/
 }

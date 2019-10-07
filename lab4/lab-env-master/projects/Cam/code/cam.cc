@@ -1,6 +1,23 @@
 #include "cam.h"
-#include "matlib.h"
 
+
+
+Cam::Cam(Vector4D startpos, Vector4D target) : pos(startpos)
+{
+	
+	LookAt(target, Vector4D(0, 1));
+	SetPerspective(0, 0, 0, 0);
+}
+
+Cam::~Cam()
+{
+}
+
+Cam::Cam(Vector4D target)
+{
+	LookAt(target, Vector4D(0, 1));
+	SetPerspective(0,0,0,0);
+}
 
 void Cam::LookAt(Vector4D target, Vector4D up)
 {
@@ -24,7 +41,7 @@ void Cam::SetPerspective(float fov, float aspectratio, float near, float far)
 	perspective = Matrix4D::PerspProj(1.5707f, (static_cast<float>(4) / static_cast<float>(3)), 0.1f, 100.0f);
 }
 
-Matrix4D Cam::GetView()
+Matrix4D Cam::GetView() const
 {
 	return view;
 }

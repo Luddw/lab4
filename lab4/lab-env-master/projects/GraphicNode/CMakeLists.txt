@@ -10,7 +10,7 @@ SET(files_GraphicNode ${GraphicNode_headers} ${GraphicNode_sources})
 SOURCE_GROUP("GraphicNode" FILES ${files_GraphicNode})
 
 ADD_LIBRARY(GraphicNode STATIC ${files_GraphicNode})
-TARGET_LINK_LIBRARIES(GraphicNode core render MeshResource ShaderResource Texture Transform)
-ADD_DEPENDENCIES(GraphicNode core render MeshResource ShaderResource Texture Transform)
+TARGET_LINK_LIBRARIES(GraphicNode core render MeshResource ShaderResource Texture Transform Cam)
+ADD_DEPENDENCIES(GraphicNode core render MeshResource ShaderResource Texture Transform Cam)
 
 TARGET_INCLUDE_DIRECTORIES(GraphicNode INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/code/)

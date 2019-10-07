@@ -1,8 +1,30 @@
 #include "graphicnode.h"
 
-GraphicNode::GraphicNode(std::shared_ptr<MeshResource> mesh, Texture& tex, ShaderResource& shader, Transform& trans)
+
+//GraphicNode::GraphicNode(MeshResource mesh, Texture tex, ShaderResource shader, Transform trans, Cam cam)
+//{
+//	p_Mesh = std::make_shared<MeshResource>(mesh);
+//	p_Shader = std::make_shared<ShaderResource>(shader);
+//	p_Texture = std::make_shared<Texture>(tex);
+//	p_Transform = std::make_shared<Transform>(trans);
+//	p_Cam = std::make_shared<Cam>(cam);
+//	
+//}
+
+
+GraphicNode::~GraphicNode()
 {
-	
+}
+
+GraphicNode::GraphicNode(std::shared_ptr<MeshResource> mesh, std::shared_ptr<Texture> texture,
+	std::shared_ptr<ShaderResource> shader, std::shared_ptr<Transform> transform, std::shared_ptr<Cam> cam)
+{
+
+	p_Mesh = std::move(mesh);
+	p_Texture = std::move(texture);
+	p_Shader = std::move(shader);
+	p_Transform = std::move(transform);
+	p_Cam = std::move(cam);
 }
 
 void GraphicNode::Draw()
@@ -15,6 +37,10 @@ void GraphicNode::Draw()
 
 	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, nullptr);
 
+	p_Mesh->UnBindIbo();
+	p_Mesh->UnBindVbo();
+	p_Texture->Unbind();
+	p_Shader->UnBind();
 }
 
 

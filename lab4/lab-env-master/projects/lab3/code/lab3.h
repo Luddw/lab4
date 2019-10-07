@@ -8,9 +8,7 @@
 //------------------------------------------------------------------------------
 #include "core/app.h"
 #include "render/window.h"
-#include "texture.h"
-#include "meshresource.h"
-#include "shaderresource.h"
+
 
 namespace Example
 {
@@ -27,9 +25,6 @@ public:
 	/// run app
 	void Run();
 private:
-
-	
-	MeshResource mesh;
 	
 	Display::Window* window;
 };
