@@ -15,7 +15,7 @@ private:
 	std::shared_ptr<Transform> p_Transform;
 	std::shared_ptr<Cam> p_Cam;
 public:
-
+	GraphicNode();
 	GraphicNode(MeshResource mesh, Texture tex, ShaderResource shader, Transform trans, Cam cam);
 	~GraphicNode();
 	GraphicNode(std::shared_ptr<MeshResource> mesh, std::shared_ptr<Texture> texture, std::shared_ptr<ShaderResource> shader, std::shared_ptr<Transform> transform, std::shared_ptr<Cam> cam);

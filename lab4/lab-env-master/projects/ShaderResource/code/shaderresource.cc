@@ -103,13 +103,11 @@ void ShaderResource::UnBind()
 void ShaderResource::SetUniform4f(const std::string& name, Vector4D vect)
 {
 	glUniform4f(GetUniLocation(name), vect[0], vect[1], vect[2], vect[3]);
-	std::cout << name << ": successfully set" << std::endl;
 }
 
 void ShaderResource::SetUniformMatrix4fv(const std::string& name, Matrix4D mat)
 {
 	glUniformMatrix4fv(GetUniLocation(name), 1, GL_TRUE, &(mat)[0]);
-	std::cout << name << ": successfully set" <<std::endl;
 }
 
 int ShaderResource::GetUniLocation(const std::string &name)

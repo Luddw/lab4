@@ -12,6 +12,11 @@
 //}
 
 
+GraphicNode::GraphicNode() :
+	p_Mesh(nullptr), p_Texture(nullptr), p_Shader(nullptr), p_Transform(nullptr), p_Cam(nullptr)
+{
+}
+
 GraphicNode::~GraphicNode()
 {
 }

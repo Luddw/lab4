@@ -274,7 +274,9 @@ Window::MakeCurrent()
 void
 Window::Update()
 {
-	glfwPollEvents();	
+	glfwPollEvents();
+	// Update the current size of the window.
+	glfwGetFramebufferSize(this->window, &this->width, &this->height);
 }
 
 //------------------------------------------------------------------------------

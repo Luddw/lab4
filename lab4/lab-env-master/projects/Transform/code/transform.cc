@@ -13,12 +13,12 @@ Transform::~Transform()
 
 void Transform::RotX(float rad)
 {
-	rot = rot * Matrix4D::RotX_axis(rad);
+	this->rot = rot * Matrix4D::RotX_axis(rad);
 }
 
 void Transform::RotY(float rad)
 {
-	rot = rot * Matrix4D::RotY_axis(rad);
+	this->rot = rot * Matrix4D::RotY_axis(rad);
 }
 
 void Transform::RotZ(float rad)
@@ -33,9 +33,9 @@ void Transform::RotVect(Vector4D vect, float rad)
 
 void Transform::Move(float x, float y, float z)
 {
-	this->translation[3] = x;
-	this->translation[7] = y;
-	this->translation[11] = z;
+	this->translation[3] += x;
+	this->translation[7] += y;
+	this->translation[11] += z;
 }
 
 void Transform::Scale(float x, float y, float z)
