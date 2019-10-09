@@ -57,10 +57,10 @@ namespace Example
 				
 				switch (key)
 				{
-				case GLFW_KEY_D: cubenode.GetTransform()->Move(-0.5f, 0, 0); 
-				case GLFW_KEY_A: cubenode.GetTransform()->Move(0.6f, 0, 0); 
-				case GLFW_KEY_S: cubenode.GetTransform()->Move(0, 0, 0.1f); 
-				case GLFW_KEY_W: cubenode.GetTransform()->Move(0, 0, -0.1f); 
+				case GLFW_KEY_D: {cubenode.GetTransform()->Move(-0.1f, 0, 0); break; }
+				case GLFW_KEY_A: {cubenode.GetTransform()->Move(0.1f, 0, 0); break; }
+				case GLFW_KEY_S: {cubenode.GetTransform()->Move(0, 0, 0.1f); break; }
+				case GLFW_KEY_W: {cubenode.GetTransform()->Move(0, 0, -0.1f); break; }
 				default: break;
 				}
 			}

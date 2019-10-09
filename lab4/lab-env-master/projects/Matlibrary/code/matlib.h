@@ -1,5 +1,6 @@
 #pragma once
 #include <cmath>
+#include <iostream>
 #define A _matrix_values
 
 /** A 4-dimensional homogenous vector*/
@@ -693,6 +694,16 @@ public:
 			0,			0,			-1,					0
 			);
 		return proj;
+	}
+
+	void Print()
+	{
+		std::cout <<
+			A[0] << "\t" << A[1] << "\t" << A[2] << "\t" << A[3] << "\n" <<
+			A[4] << "\t" << A[5] << "\t" << A[6] << "\t" << A[7] << "\n" <<
+			A[8] << "\t" << A[9] << "\t" << A[10] << "\t" << A[11] << "\n" <<
+			A[12] << "\t" << A[13] << "\t" << A[14] << "\t" << A[15] << std::endl;
+		std::cout << "---------------------------------------"<<std::endl;
 	}
 private:
 	/**

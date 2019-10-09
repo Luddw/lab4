@@ -33,9 +33,11 @@ void Transform::RotVect(Vector4D vect, float rad)
 
 void Transform::Move(float x, float y, float z)
 {
-	this->translation[3] += x;
-	this->translation[7] += y;
-	this->translation[11] += z;
+	translation.Print();
+	translation[3] = translation[3]+x;
+	translation[7] = translation[7]+y;
+	translation[11] = translation[11]+z;
+	translation.Print();
 }
 
 void Transform::Scale(float x, float y, float z)
